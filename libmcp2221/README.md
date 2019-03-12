@@ -1,13 +1,17 @@
+# build MCP2221 HID Library
 
-# MCP2221 HID Library
+	$ sudo apt install libudev-dev libusb-1.0-0-dev
+	$ make
+
+## [MCP2221 HID Library](https://github.com/zkemble/libmcp2221)
 Makefile, libmcp2221.c, libmcp2221.h
 
 * https://github.com/zkemble/libmcp2221
-* [GNU GPL v3](./LICENSE-libmcp2221.txt)
+* GNU GPL v3
 
-# HIDAPI library
+## [HIDAPI library](https://github.com/signal11/hidapi)
 hid.c, hidapi.h
 
 * https://github.com/signal11/hidapi
-* [GNU GPL v3](./LICENSE-gpl3-hidapi.txt)
+* GNU GPL v3
 
