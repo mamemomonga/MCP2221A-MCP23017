@@ -82,4 +82,9 @@ dirs:
 	mkdir $(BIN_DIR) 2>$(NULLOUT) || true
 	mkdir $(OBJ_DIR) 2>$(NULLOUT) || true
 
+install:
+	cp -f libmcp2221.h /usr/include/
+	cp -f bin/libmcp2221.so /usr/lib/
+	cp -f bin/libmcp2221.a /usr/lib/
+
 .PHONY: clean all
