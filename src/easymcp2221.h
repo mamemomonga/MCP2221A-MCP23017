@@ -12,12 +12,11 @@
 #define mcp23017Read(a,b) { i2cWrite1byte(MCP23017_ADDR,a); *b=i2cRead1byte(MCP23017_ADDR); }
 #define sleep_ms(a) { usleep( a*1000 ); }
 
-int init_app(void);
-void i2cWrite2byte(uint8_t, uint8_t, uint8_t);
-void i2cWrite1byte(uint8_t, uint8_t);
-uint8_t i2cRead1byte(uint8_t);
-
-void gpioInterrupt(void(*)(void));
+extern int init_app(void);
+extern void i2cWrite2byte(uint8_t, uint8_t, uint8_t);
+extern void i2cWrite1byte(uint8_t, uint8_t);
+extern uint8_t i2cRead1byte(uint8_t);
+extern void gpioInterrupt(void(*)(void));
 
 mcp2221_t*   myMCP2221;
 
