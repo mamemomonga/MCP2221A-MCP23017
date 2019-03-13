@@ -46,3 +46,41 @@ uint8_t i2cRead1byte(uint8_t adr) {
 	return d;
 }
 
+void gpioInterrupt(void(*cb)(void)) {
+
+	mcp2221_gpioconfset_t gpioConf = mcp2221_GPIOConfInit();
+	gpioConf.conf[0].gpios = MCP2221_GPIO1;
+	gpioConf.conf[0].mode  = MCP2221_GPIO_MODE_ALT3;
+	mcp2221_setGPIOConf(myMCP2221, &gpioConf);
+	mcp2221_setInterrupt(myMCP2221, MCP2221_INT_TRIG_FALLING, 1);
+
+	mcp2221_error res;
+	while(1) {
+		int interrupt;
+		res = mcp2221_readInterrupt(myMCP2221, &interrupt);
+		if(res != MCP2221_SUCCESS) break;
+		if(interrupt) {
+			res = mcp2221_clearInterrupt(myMCP2221);
+			if(res != MCP2221_SUCCESS) break;
+			(*cb)();
+		}
+	}
+	switch(res) {
+		case MCP2221_SUCCESS:
+			puts("No error");
+			break;
+		case MCP2221_ERROR:
+			puts("General error");
+			break;
+		case MCP2221_INVALID_ARG:
+			puts("Invalid argument, probably null pointer");
+			break;
+		case MCP2221_ERROR_HID:
+			puts("USB HID Error");
+			break;
+		default:
+			printf("Unknown error %d\n", res);
+			break;
+	}
+}
+

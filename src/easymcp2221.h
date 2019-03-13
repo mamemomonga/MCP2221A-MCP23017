@@ -17,7 +17,8 @@ void i2cWrite2byte(uint8_t, uint8_t, uint8_t);
 void i2cWrite1byte(uint8_t, uint8_t);
 uint8_t i2cRead1byte(uint8_t);
 
-mcp2221_t*   myMCP2221;
+void gpioInterrupt(void(*)(void));
 
+mcp2221_t*   myMCP2221;
 
 #endif /* EASYMCP2221_H_ */
