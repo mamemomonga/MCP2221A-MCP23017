@@ -18,7 +18,7 @@ MCP2221A + MCP23017 でLEDチカチカ
 
 blink
 
-	$ cd src/blink
+	$ cd c/blink
 	$ make
 	$ sudo ./blink
 
