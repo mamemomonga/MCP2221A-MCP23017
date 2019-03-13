@@ -1,0 +1,5 @@
+# Go
+
+	$ make deps
+	$ make
+

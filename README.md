@@ -16,12 +16,11 @@ MCP2221A + MCP23017 でLEDチカチカ
 	$ sudo make install
 	$ cd ..
 
-blink
 
-	$ cd c/blink
-	$ make
-	$ sudo ./blink
-
+* [C](/c/)
+* [Go](/go/)
+* [libmcp2221](/libmcp2221/)
+	
 # LICENSE
 
 GNU GPL v3
