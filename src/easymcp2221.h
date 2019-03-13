@@ -6,7 +6,10 @@
 #include <stdlib.h>
 #include <libmcp2221.h>
 
-#define sleep_ms(a) { usleep( a * 1000); }
+#define MCP23017_ADDR 0x20
+
+#define mcp23017Write(a,b) { i2cWrite2byte(MCP23017_ADDR,a,b); }
+#define sleep_ms(a) { usleep( a*1000 ); }
 
 int init_app(void);
 void i2cWrite2byte(uint8_t, uint8_t, uint8_t);
