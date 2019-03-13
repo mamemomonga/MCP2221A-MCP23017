@@ -1,10 +1,10 @@
 # MCP2221A + MCP23017
 
-# $B2sO)?^(B
+# 回路図
 
-$B$=$N$&$A=q$/(B
+そのうち書く
 
-# $B%S%k%I$H<B9T(B
+# ビルドと実行
 
 	$ cd libmcp2221
 	$ sudo apt install libudev-dev libusb-1.0-0-dev
