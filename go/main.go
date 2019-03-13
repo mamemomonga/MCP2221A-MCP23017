@@ -1,54 +1,39 @@
 package main
 
 import (
-	"./gomcp2221"
+	"./mcp2221"
 	"fmt"
 	"time"
+	"github.com/davecgh/go-spew/spew"
 )
 
-var gm *gomcp2221.GoMCP2221
+var iox *mcp2221.MCP23017
 
 func output() {
-	gm.WriteMCP23017(0x00,0x00)
-	gm.WriteMCP23017(0x14,0x15)
+	iox.DirectionA([]uint8{0,0,0,0,0,0,0,0})
+	iox.LatchA([]uint8{1,1,0,0,1,1,0,0})
 }
-
 func input() {
-	gm.WriteMCP23017(0x01,0xFF) // IODIRB
-	gm.WriteMCP23017(0x0D,0xFF) // GPPUB
-
+	iox.DirectionB([]uint8{1,1,1,1,1,1,1,1})
+	iox.PullUpB([]uint8{1,1,1,1,1,1,1,1})
 	for true {
-		val := gm.ReadMCP23017(0x13) // GPIOB
-		fmt.Printf("Value: %02x\n",val)
+		spew.Dump( iox.GpioB() )
 		time.Sleep(100 * time.Millisecond)
 	}
 }
-
 func input_interrupt() {
-	gm.WriteMCP23017(0x01,0xFF) // IODIRB
-	gm.WriteMCP23017(0x0D,0xFF) // GPPUB
-
-	gm.WriteMCP23017(0x05,0xFF); // GPINTENB
-	gm.WriteMCP23017(0x07,0xFF); // DEFVALB
-	gm.WriteMCP23017(0x09,0xFF); // INTCONB
-
-	var prev uint8 = 0x00
-
-	cb := func() {
-		val := gm.ReadMCP23017(0x13) // GPIOB
-		if prev != val {
-			fmt.Printf("Value: %02x\n",val)
-		}
-		prev = val
-	}
-
-	gm.GpioI2CInterrupt(cb)
-
+	iox.DirectionB([]uint8{1,1,1,1,1,1,1,1})
+	iox.PullUpB([]uint8{1,1,1,1,1,1,1,1})
+	iox.InterruptB(func(val []uint8) {
+		spew.Dump(val)
+	})
 }
 
 func main() {
-	gm = gomcp2221.NewGoMCP2221()
+	iox = mcp2221.NewMCP23017(mcp2221.MCP23017_DEFAULT_ADDR)
 	fmt.Println("Running...")
+	//output()
+	//input()
 	input_interrupt()
 }
 
