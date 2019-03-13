@@ -4,7 +4,7 @@ import (
 	"log"
 )
 
-const DEBUG = true
+const DEBUG = false
 const MCP23017_DEFAULT_ADDR = 0x20
 
 type MCP23017 struct {
@@ -52,6 +52,14 @@ func (this *MCP23017) bv2a(in uint8) []uint8 {
 		}
 	}
 	return v
+}
+
+func (this *MCP23017) AllHigh()[]uint8 {
+	return []uint8{1,1,1,1,1,1,1,1}
+}
+
+func (this *MCP23017) AllLow() []uint8 {
+	return []uint8{0,0,0,0,0,0,0,0}
 }
 
 // ICON.BANK=0 専用
