@@ -1,5 +1,9 @@
 # MCP2221A + MCP23017
 
+MCP2221A + MCP23017 でLEDチカチカ
+
+ホストマシン: Linux(Debian 9)
+
 # 回路図
 
 そのうち書く
