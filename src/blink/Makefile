@@ -1,7 +1,7 @@
 PROJECT=blink
 
 SOURCES= \
-	main.c
+	../easymcp2221.c main.c
 
 CFLAGS= \
 	-c \

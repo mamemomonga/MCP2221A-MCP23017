@@ -14,7 +14,11 @@ MCP2221A + MCP23017 でLEDチカチカ
 	$ sudo apt install libudev-dev libusb-1.0-0-dev
 	$ make
 	$ sudo make install
-	$ cd ../blink
+	$ cd ..
+
+blink
+
+	$ cd src/blink
 	$ make
 	$ sudo ./blink
 
