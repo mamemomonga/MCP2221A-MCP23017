@@ -87,4 +87,10 @@ install:
 	cp -f bin/libmcp2221.so /usr/lib/
 	cp -f bin/libmcp2221.a /usr/lib/
 
+uninstall:
+	rm -f /usr/include/libmcp2221.h
+	rm -f /usr/lib/libmcp2221.so
+	rm -f /usr/lib/libmcp2221.a
+
+
 .PHONY: clean all
