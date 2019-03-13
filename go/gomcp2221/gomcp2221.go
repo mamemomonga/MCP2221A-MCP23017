@@ -64,8 +64,47 @@ func (this *GoMCP2221) I2CRead1byte(adr int) (uint8) {
 	C.mcp2221_i2cRead(this.myDev, (C.int)(adr), 1, C.MCP2221_I2CRW_NORMAL)
 	this.i2cWaitState(C.MCP2221_I2C_DATAREADY)
 	var d uint8 = 0
-	C.mcp2221_i2cGet(this.myDev, unsafe.Pointer(&d), 1);
-	return d;
+	C.mcp2221_i2cGet(this.myDev, unsafe.Pointer(&d), 1)
+	return d
+}
+
+func (this *GoMCP2221) GpioI2CInterrupt(cb func()) {
+
+	var gpioConf C.mcp2221_gpioconfset_t
+	gpioConf = C.mcp2221_GPIOConfInit()
+
+	gpioConf.conf[0].gpios = C.MCP2221_GPIO1
+	gpioConf.conf[0].mode  = C.MCP2221_GPIO_MODE_ALT3
+	C.mcp2221_setGPIOConf(this.myDev, &gpioConf)
+	C.mcp2221_setInterrupt(this.myDev, C.MCP2221_INT_TRIG_FALLING, 1)
+
+	var res C.mcp2221_error
+	for true {
+		var interrupt C.int
+		res = C.mcp2221_readInterrupt(this.myDev, &interrupt)
+		if res != C.MCP2221_SUCCESS {
+			break
+		}
+		if interrupt != 0 {
+			res = C.mcp2221_clearInterrupt(this.myDev)
+			if res != C.MCP2221_SUCCESS {
+				break
+			}
+			cb()
+		}
+	}
+	switch res {
+		case C.MCP2221_SUCCESS:
+			log.Println("No error")
+		case C.MCP2221_ERROR:
+			log.Println("General error")
+		case C.MCP2221_INVALID_ARG:
+			log.Println("Invalid argument, probably null pointer")
+		case C.MCP2221_ERROR_HID:
+			log.Println("USB HID Error")
+		default:
+			log.Printf("Unknown error %d\n", res)
+	}
 }
 
 func (this *GoMCP2221) WriteMCP23017(val1 uint8, val2 uint8) {
