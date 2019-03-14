@@ -1,11 +1,17 @@
 # MCP2221A + MCP23017
 
-MCP2221A + MCP23017 でLEDチカチカ
+[libmcp2221](https://github.com/zkemble/libmcp2221) を使って、
+Linuxから Go と C から利用するサンプルコードとライブラリです。
+主に i2c からMCP23017を利用するための限定的なライブラリです。
+カーネルのi2cドライバは使用しません。
+
+* [libmcp2221のセットアップ](./libmcp2221/)
+* [Goのライブラリとサンプル](./go)
+* [Cのサンプル](./c)
 
 ホストマシン: Linux(Debian 9)
 
 # 回路図
-
 
 ![schematics.png](resource/schematics.png)
 
@@ -20,11 +26,6 @@ MCP2221A + MCP23017 でLEDチカチカ
 	$ sudo make install
 	$ cd ..
 
-
-* [C](/c/)
-* [Go](/go/)
-* [libmcp2221](/libmcp2221/)
-	
 # LICENSE
 
 GNU GPL v3
