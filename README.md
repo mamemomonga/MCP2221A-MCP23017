@@ -6,7 +6,11 @@ MCP2221A + MCP23017 でLEDチカチカ
 
 # 回路図
 
-そのうち書く
+
+![schematics.png](resource/schematics.png)
+
+![photo.hpg](resource/photo.jpg)
+
 
 # ビルドと実行
 
