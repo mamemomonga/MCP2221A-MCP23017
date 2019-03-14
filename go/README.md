@@ -1,4 +1,4 @@
-# Go
+# MCP2221A + MCP23017 Go Library
 
 	$ cd examples
 	$ make deps
