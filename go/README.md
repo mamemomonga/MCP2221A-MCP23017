@@ -6,9 +6,9 @@
 	$ sudo bin/output
 
 
-# $B%i%$%V%i%j$H$7$F;H$&(B
+# ライブラリとして使う
 
-$B;vA0$K(B libmcp2221 $B$N%$%s%9%H!<%k$,I,MW!#(B
+事前に libmcp2221 のインストールが必要。
 
 main.go
 
@@ -46,7 +46,7 @@ main.go
 	        }
 	}
 
-$B%S%k%I$H<B9T(B
+ビルドと実行
 
 	$ go get ./main.go
 	$ go build ./main
