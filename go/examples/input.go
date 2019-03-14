@@ -17,7 +17,7 @@ func main() {
 
 	for true {
 		spew.Dump( iox.GpioB() )
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 	}
 
 }

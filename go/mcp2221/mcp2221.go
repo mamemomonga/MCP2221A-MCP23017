@@ -31,8 +31,8 @@ func NewMCP2221()(*MCP2221) {
 		log.Fatal("Device open failed")
 	}
 
-	// Set divider from 12MHz
-	C.mcp2221_i2cDivider(this.myDev, 26);
+	C.mcp2221_i2cDivider(this.myDev, 26); // 12MHz
+
 	return this
 }
 func (this *MCP2221) Lock() {

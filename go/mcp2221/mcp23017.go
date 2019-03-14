@@ -2,6 +2,8 @@ package mcp2221
 
 import (
 	"log"
+	"time"
+//	"github.com/davecgh/go-spew/spew"
 )
 
 const DEBUG = false
@@ -42,7 +44,7 @@ func (this *MCP23017) a2bv(in []uint8) uint8 {
 }
 
 func (this *MCP23017) bv2a(in uint8) []uint8 {
-	v := []uint8{0,0,0,0,0,0,0,0}
+	v := this.AllLow()
 	var i uint8
 	for i=0;i<8;i++ {
 		if ( in & (1 << i)) > 0 {
@@ -89,18 +91,26 @@ func (this *MCP23017) GpioB() (v []uint8) {
 	return this.bv2a(this.Read(0x13)) // GPIOB
 }
 
+// MCP2221の割り込み機能を使わず、MCP23017の割り込みのみ使う
+// MCP2221 GP0 - MCP23017 INTB
 func (this *MCP23017) InterruptB(cb func([]uint8)) {
 	this.Write(0x05,0xFF) // GPINTENB
 	this.Write(0x07,0xFF) // DEFVALB
-	this.Write(0x09,0xFF) // INTCONB
+	this.Write(0x09,0x00) // INTCONB
 
-	this.intervalPrevVal=0x00
-	this.MCP2221.GpioI2CInterrupt(func() {
-		val := this.Read(0x13) // GPIOB
-		if this.intervalPrevVal != val {
-			cb(this.bv2a(val))
+	this.MCP2221.GpioDirection(0,1) // GP0 Input
+	this.MCP2221.GpioSet(0,1) // GP0 High
+
+	for true {
+		intr := this.MCP2221.GpioGet(0)
+		if intr == 0 {
+			time.Sleep(1*time.Millisecond) // 誤検出防止
+			val := this.Read(0x13) // GPIOB
+			if this.intervalPrevVal != val {
+				cb(this.bv2a(val))
+			}
+			this.intervalPrevVal = val
 		}
-		this.intervalPrevVal = val
-	})
+	}
 }
 

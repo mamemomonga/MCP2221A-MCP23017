@@ -69,6 +69,7 @@ func blink() {
 func buttons() {
 	iox.DirectionB(iox.AllHigh())
 	iox.PullUpB(iox.AllHigh())
+
 	iox.InterruptB(func(val []uint8) {
 		spew.Dump(val)
 		if val[0] == 0 {
