@@ -2,7 +2,7 @@ package main
 
 import (
 	"../mcp2221"
-	"fmt"
+	"log"
 	"time"
 	"sync"
 	"github.com/davecgh/go-spew/spew"
@@ -72,28 +72,28 @@ func buttons() {
 
 	iox.InterruptB(func(val []uint8) {
 		spew.Dump(val)
-		if val[0] == 0 {
-			blinkm.Lock()
-			patternc = patterns[0]
-			blinkm.Unlock()
-		}
-		if val[1] == 0 {
-			blinkm.Lock()
-			patternc = patterns[1]
-			blinkm.Unlock()
+		for i:=0;i<4;i++ {
+			if val[i] == 0 {
+				blinkm.Lock()
+				patternc = patterns[i]
+				blinkm.Unlock()
+				break
+			}
 		}
 	})
 }
 
 func main() {
 	iox = mcp2221.NewMCP23017(mcp2221.MCP23017_DEFAULT_ADDR)
-	fmt.Println("Running...")
+	log.Println("Running...")
 
 	blinkm  = new(sync.Mutex)
 
-	patterns = make([][]uint8,10)
-	patterns[0] = []uint8{ 0,0,1,0,0,2,0,0, 3,4,3,4 }
-	patterns[1] = []uint8{ 3,4,3,4 }
+	patterns = make([][]uint8,5)
+	patterns[0] = []uint8{ 1,3,2,3 }
+	patterns[1] = []uint8{ 0,0,0,1,0,0,0,2,0,0,0 }
+	patterns[2] = []uint8{ 3,4,0,0,1,0,0,3,4,0,0,2,0,0 }
+	patterns[3] = []uint8{ 3,4,3,4 }
 
 	patternc = patterns[0]
 

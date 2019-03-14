@@ -4,7 +4,7 @@ all: \
 	bin/input \
 	bin/output \
 	bin/input_interrupt \
-	bin/blinkbtn \
+	bin/blink_btn \
 	bin/gpio_output \
 	bin/gpio_input
 
@@ -26,9 +26,9 @@ bin/input_interrupt: input_interrupt.go
 	mkdir -p bin
 	go build -o $@ ./input_interrupt.go
 
-bin/blinkbtn: blinkbtn.go
+bin/blink_btn: blink_btn.go
 	mkdir -p bin
-	go build -o $@ ./blinkbtn.go
+	go build -o $@ ./blink_btn.go
 
 bin/gpio_output: gpio_output.go
 	mkdir -p bin
