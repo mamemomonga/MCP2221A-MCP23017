@@ -4,7 +4,7 @@ MCP2221AはUSBからUART,GPIO,I2CをコントロールできるICです。シン
 
 [MCP2221Aメモ](https://gist.github.com/mamemomonga/fdb7a2330b0a3c5d2ba50528c5946ef4)もご覧下さい。
 
-[libmcp2221](https://github.com/zkemble/libmcp2221) を使って、
+これは[libmcp2221](https://github.com/zkemble/libmcp2221) を使って、
 Linuxから Go と C から利用するサンプルコードとライブラリです。
 主に i2c からMCP23017を利用するための限定的なライブラリです。
 カーネルのi2cドライバは使用しません。
