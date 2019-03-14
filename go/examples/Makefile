@@ -1,6 +1,12 @@
 .PHONY: all clean deps
 
-all: bin/input bin/output bin/input_interrupt bin/blinkbtn
+all: \
+	bin/input \
+	bin/output \
+	bin/input_interrupt \
+	bin/blinkbtn \
+	bin/gpio_output \
+	bin/gpio_input
 
 clean:
 	rm -rf bin
@@ -23,4 +29,12 @@ bin/input_interrupt: input_interrupt.go
 bin/blinkbtn: blinkbtn.go
 	mkdir -p bin
 	go build -o $@ ./blinkbtn.go
+
+bin/gpio_output: gpio_output.go
+	mkdir -p bin
+	go build -o $@ ./gpio_output.go
+
+bin/gpio_input: gpio_input.go
+	mkdir -p bin
+	go build -o $@ ./gpio_input.go
 
