@@ -3,8 +3,8 @@ package main
 import (
 	"../mcp2221"
 	"fmt"
-	"time"
 	"github.com/davecgh/go-spew/spew"
+	"time"
 )
 
 func main() {
@@ -16,9 +16,8 @@ func main() {
 	iox.PullUpB(iox.AllHigh())
 
 	for true {
-		spew.Dump( iox.GpioB() )
+		spew.Dump(iox.GpioB())
 		time.Sleep(10 * time.Millisecond)
 	}
 
 }
-

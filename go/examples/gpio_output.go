@@ -4,7 +4,7 @@ import (
 	"../mcp2221"
 	"fmt"
 	"time"
-//	"github.com/davecgh/go-spew/spew"
+	//	"github.com/davecgh/go-spew/spew"
 )
 
 func main() {
@@ -12,14 +12,13 @@ func main() {
 	iox = mcp2221.NewMCP2221()
 	fmt.Println("Running...")
 
-	iox.GpioDirection(0,0)
+	iox.GpioDirection(0, 0)
 
 	for true {
-		iox.GpioSet(0,0)
+		iox.GpioSet(0, 0)
 		time.Sleep(500 * time.Millisecond)
 
-		iox.GpioSet(0,1)
+		iox.GpioSet(0, 1)
 		time.Sleep(500 * time.Millisecond)
 	}
 }
-
