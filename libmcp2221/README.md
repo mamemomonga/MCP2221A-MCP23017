@@ -2,6 +2,7 @@
 
 	$ sudo apt install libudev-dev libusb-1.0-0-dev
 	$ make
+	$ sudo make install
 
 ## [MCP2221 HID Library](https://github.com/zkemble/libmcp2221)
 Makefile, libmcp2221.c, libmcp2221.h
