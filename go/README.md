@@ -2,6 +2,7 @@
 
 事前に [libmcp2221](../libmcp2221) のインストールが必要。
 
+
 main.go
 
 	package main
@@ -44,4 +45,5 @@ main.go
 	$ go build ./main
 	$ sudo ./main
 
-[サンプル](./examples)
+# [サンプルコード](./examples)
+

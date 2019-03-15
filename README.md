@@ -30,6 +30,10 @@ Linuxから Go と C から利用するサンプルコードとライブラリ�
 	$ sudo make install
 	$ cd ..
 
+# AUTHOR
+
+mamemomonga
+
 # LICENSE
 
 GNU GPL v3
