@@ -25,10 +25,10 @@ func gpio_set() {
 // 0=All High, 1~8: Set Low /Y0~/Y7
 func gpio_tc74hc138_set(num uint8) {
 	val := uint8(0)
-	// 0x00 $B$@$H$9$Y$F$N%T%s$,(BHIGH$B$K$J$k(B
-	// 0x08 $B$+$i(B0x0f$B$^$G$r$$$l$k$HFCDj$N%T%s$,(BLOW$B$K$J$k(B
+	// 0x00 だとすべてのピンがHIGHになる
+	// 0x08 から0x0fまでをいれると特定のピンがLOWになる
 	if num == 0 { val = 0x00 } else { val = 0x07 + num }
-	// $BKvHx(B4$B%S%C%H$r(BGPA$B$K%;%C%H(B
+	// 末尾4ビットをGPAにセット
 	for i:=uint8(0); i<4; i++ {
 		if val >> i & 1 > 0 { gpio[i]=1 } else { gpio[i]=0 }
 	}
@@ -37,10 +37,10 @@ func gpio_tc74hc138_set(num uint8) {
 // 0=All Off, 1~8: On 0~7
 func gpio_tc4051_set(num uint8) {
 	val := uint8(0)
-	// 0x08 $B$@$H$9$Y$F$N%T%s$,(BOFF$B$K$J$k(B
-	// 0x00 $B$+$i(B0x07$B$^$G$r$$$l$k$HFCDj$N%T%s$,(BON$B$K$J$k(B
+	// 0x08 だとすべてのピンがOFFになる
+	// 0x00 から0x07までをいれると特定のピンがONになる
 	if num == 0 { val = 0x08 } else { val = uint8(num-1) }
-	// $BKvHx(B4$B%S%C%H$r(BGPA$B$K%;%C%H(B
+	// 末尾4ビットをGPAにセット
 	for i:=uint8(0); i<4; i++ {
 		if val >> i & 1 > 0 { gpio[i+4]=1 } else { gpio[i+4]=0 }
 	}
