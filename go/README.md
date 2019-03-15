@@ -1,10 +1,9 @@
 # MCP2221A + MCP23017 Go Library
 
-	$ cd examples
+	$ cd simple
 	$ make deps
 	$ make
 	$ sudo bin/output
-
 
 # ライブラリとして使う
 
