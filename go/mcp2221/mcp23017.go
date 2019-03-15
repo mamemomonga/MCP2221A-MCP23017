@@ -66,7 +66,7 @@ func (this *MCP23017) AllLow() []uint8 {
 	return []uint8{0, 0, 0, 0, 0, 0, 0, 0}
 }
 
-func (this *MCP23017) Byte(b0,b1,b2,b3,b4,b5,b6,b7 uint8) []uint8 {
+func (this *MCP23017) Byte(b0, b1, b2, b3, b4, b5, b6, b7 uint8) []uint8 {
 	return []uint8{b0, b1, b2, b3, b4, b5, b6, b7}
 }
 
