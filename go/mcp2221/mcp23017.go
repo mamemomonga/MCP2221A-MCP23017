@@ -31,7 +31,8 @@ func (this *MCP23017) Read(val uint8) uint8 {
 	return this.MCP2221.I2CRead1byte(this.devAddr)
 }
 
-func (this *MCP23017) a2bv(in []uint8) uint8 {
+// Slice to Bit vector
+func (this *MCP23017) S2BV(in []uint8) uint8 {
 	var v uint8
 	var i uint8
 	for i = 0; i < 8; i++ {
@@ -43,7 +44,8 @@ func (this *MCP23017) a2bv(in []uint8) uint8 {
 	return v
 }
 
-func (this *MCP23017) bv2a(in uint8) []uint8 {
+// Bit vector to Slice
+func (this *MCP23017) BV2S(in uint8) []uint8 {
 	v := this.AllLow()
 	var i uint8
 	for i = 0; i < 8; i++ {
@@ -64,31 +66,35 @@ func (this *MCP23017) AllLow() []uint8 {
 	return []uint8{0, 0, 0, 0, 0, 0, 0, 0}
 }
 
+func (this *MCP23017) Byte(b0,b1,b2,b3,b4,b5,b6,b7 uint8) []uint8 {
+	return []uint8{b0, b1, b2, b3, b4, b5, b6, b7}
+}
+
 // ICON.BANK=0 専用
 
 func (this *MCP23017) DirectionA(v []uint8) {
-	this.Write(0x00, this.a2bv(v)) // IODIRA
+	this.Write(0x00, this.S2BV(v)) // IODIRA
 }
 func (this *MCP23017) DirectionB(v []uint8) {
-	this.Write(0x01, this.a2bv(v)) // IODIRB
+	this.Write(0x01, this.S2BV(v)) // IODIRB
 }
 func (this *MCP23017) LatchA(v []uint8) {
-	this.Write(0x14, this.a2bv(v)) // OLATA
+	this.Write(0x14, this.S2BV(v)) // OLATA
 }
 func (this *MCP23017) LatchB(v []uint8) {
-	this.Write(0x15, this.a2bv(v)) // OLATB
+	this.Write(0x15, this.S2BV(v)) // OLATB
 }
 func (this *MCP23017) PullUpA(v []uint8) {
-	this.Write(0x0c, this.a2bv(v)) // GPPUA
+	this.Write(0x0c, this.S2BV(v)) // GPPUA
 }
 func (this *MCP23017) PullUpB(v []uint8) {
-	this.Write(0x0d, this.a2bv(v)) // GPPUB
+	this.Write(0x0d, this.S2BV(v)) // GPPUB
 }
 func (this *MCP23017) GpioA() (v []uint8) {
-	return this.bv2a(this.Read(0x12)) // GPIOA
+	return this.BV2S(this.Read(0x12)) // GPIOA
 }
 func (this *MCP23017) GpioB() (v []uint8) {
-	return this.bv2a(this.Read(0x13)) // GPIOB
+	return this.BV2S(this.Read(0x13)) // GPIOB
 }
 
 // MCP2221の割り込み機能を使わず、MCP23017の割り込みのみ使う
@@ -107,7 +113,7 @@ func (this *MCP23017) InterruptB(cb func([]uint8)) {
 			time.Sleep(1 * time.Millisecond) // 誤検出防止
 			val := this.Read(0x13)           // GPIOB
 			if this.intervalPrevVal != val {
-				cb(this.bv2a(val))
+				cb(this.BV2S(val))
 			}
 			this.intervalPrevVal = val
 		}
