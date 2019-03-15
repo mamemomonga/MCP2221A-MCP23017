@@ -1,5 +1,7 @@
 # MCP2221A + MCP23017 Go Library
 
+[サンプルコード](./examples)
+
 事前に [libmcp2221](../libmcp2221) のインストールが必要。
 
 
@@ -45,5 +47,11 @@ main.go
 	$ go build ./main
 	$ sudo ./main
 
-# [サンプルコード](./examples)
+# AUTHOR
+
+mamemomonga
+
+# LICENSE
+
+GNU GPL v3
 

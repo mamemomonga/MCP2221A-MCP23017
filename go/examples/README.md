@@ -40,11 +40,4 @@ MCP23017でピカピカ点滅しつつ、ボタンで挙動の変更
 
 [TC4051BP](https://toshiba.semicon-storage.com/jp/product/logic/cmos-logic/detail.TC4051BP.html)(Single 8ch Multiplexer/Demultiplexer)で、入出力信号の切り替え。
 
-# AUTHOR
-
-mamemomonga
-
-# LICENSE
-
-GNU GPL v3
 
