@@ -38,14 +38,14 @@ MCP23017でピカピカ点滅しつつ、ボタンで挙動の変更
 
 配線
 
- Misc | MCP23017 | TC74HC138
-------|----------|----------
-      | GPA0     | A
-      | GPA1     | B
-      | GPA2     | C
-      | GPA3     | G1
- GND  |          | /G2A
- GND  |          | /G2B
+| Misc | MCP23017 | TC74HC138 |
+|------|----------|-----------|
+|      | GPA0     | A         |
+|      | GPA1     | B         |
+|      | GPA2     | C         |
+|      | GPA3     | G1        |
+| GND  |          | /G2A      |
+| GND  |          | /G2B      |
 
 ### TC4501BP-1.go
 
@@ -57,14 +57,14 @@ MCP23017でピカピカ点滅しつつ、ボタンで挙動の変更
 
 0~1 をラズベリーパイのTx,Rx、COMをMCP2221のURx, UTxへ。
 
- Misc  | MCP23017 | TC4501BP(1)| TC4501BP(2)
--------|----------|------------|-----
-       | GPA4     | A          | A
-       | GPA5     | B          | B
-       | GPA6     | C          | C
-       | GPA7     | INH        | INH
- +3.3V |          | VDD        | VDD
- GND   |          | VEE        | VEE
- GND   |          | VSS        | VSS
+| Misc  | MCP23017 | TC4501BP(1)| TC4501BP(2)|
+|-------|----------|------------|------------|
+|       | GPA4     | A          | A          |
+|       | GPA5     | B          | B          |
+|       | GPA6     | C          | C          |
+|       | GPA7     | INH        | INH        |
+| +3.3V |          | VDD        | VDD        |
+| GND   |          | VEE        | VEE        |
+| GND   |          | VSS        | VSS        |
 
 
