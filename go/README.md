@@ -1,12 +1,5 @@
 # MCP2221A + MCP23017 Go Library
 
-	$ cd simple
-	$ make deps
-	$ make
-	$ sudo bin/output
-
-# ライブラリとして使う
-
 事前に [libmcp2221](../libmcp2221) のインストールが必要。
 
 main.go
@@ -51,4 +44,4 @@ main.go
 	$ go build ./main
 	$ sudo ./main
 
-
+[サンプル](./examples)
