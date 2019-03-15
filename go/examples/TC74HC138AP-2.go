@@ -1,22 +1,5 @@
 package main
 
-/*
-  MCP2221A + MCP23017 + TC74HC138
-  GPAの先頭4ビットのみ使い、残りを別の用途として使えるようにする。
-
-  $ go get ./74138-2.go
-  $ go build ./74138-2.go
-  $ sudo ./74138-2
-
-Wireing:
-  MCP23017 GPA0 - TC74HC138 A
-  MCP23017 GPA1 - TC74HC138 B
-  MCP23017 GPA2 - TC74HC138 C
-  MCP23017 GPA3 - TC74HC138 G1
-  GND           - TC74HC138 /G2A
-  GND           - TC74HC138 /G2B
-*/
-
 import (
 	"github.com/mamemomonga/MCP2221A-MCP23017/go/mcp2221"
 	"time"
