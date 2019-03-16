@@ -1,7 +1,11 @@
-# pi-reset
+# pi-hwctl
 
 * 8台のRaspberry Pi をリセットできます
 * 8台のRaspberry Pi のUARTコンソールを切り替えます
+
+# 配線図
+
+TBD
 
 # ビルド
 
