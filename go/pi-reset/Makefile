@@ -1,14 +1,16 @@
 .PHONY: all deps clean
 
-all: bin/pi-reset
+PROGNAME=pi-hwctl
+
+all: bin/$(PROGNAME)
 
 deps:
 	go get -v github.com/mamemomonga/MCP2221A-MCP23017/go/mcp2221
 
 clean:
-	rm -rf ./bin
+	rm -f ./bin/$(PROGNAME)
 
-bin/pi-reset: main.go
+bin/$(PROGNAME): main.go
 	mkdir -p ./bin
 	go build -o $@ $<
 

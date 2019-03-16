@@ -6,12 +6,14 @@ import (
 	"flag"
 	"os"
 	"time"
+	"os/exec"
 )
 
 const DELAY=100
+const BIN_SCREEN="screen"
+const SERIAL_PORT="/dev/ttyACM0"
 
 var iox *mcp2221.MCP23017
-
 var gpio []uint8
 
 func gpio_clear() {
@@ -46,9 +48,25 @@ func gpio_tc4051_set(num uint8) {
 	}
 }
 
+func run_command(c string, p... string) error {
+	cmd := exec.Command(c, p...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Stdin  = os.Stdin
+	if err := cmd.Start(); err != nil {
+		return err
+	}
+	if err := cmd.Wait(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func main() {
 	p := flag.Int("p",-1, "select serial(0-7) / -1 Off")
 	r := flag.Int("r",-1, "select reset(0-7) / -1 Do nothing")
+	s := flag.Bool("s",false,"run screen")
+
 	flag.Parse()
 
 	iox = mcp2221.NewMCP23017(mcp2221.MCP23017_DEFAULT_ADDR)
@@ -82,9 +100,16 @@ func main() {
 		gpio_tc74hc138_set(n)
 	}
 	gpio_set()
-
 	time.Sleep(100 * time.Millisecond)
 	gpio_tc74hc138_set(0)
 	gpio_set()
+
+	if *s {
+		log.Println("start screen")
+		time.Sleep(1000 * time.Millisecond)
+		run_command(BIN_SCREEN,SERIAL_PORT,"115200")
+		gpio_tc4051_set(0)
+		gpio_set()
+	}
 }
 
